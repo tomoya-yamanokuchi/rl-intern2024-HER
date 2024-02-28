@@ -10,16 +10,20 @@ class CubeCanonicalRGB:
     def get_rgb_dict(self, object_rgb, num_object_geom):
         return {
             **self.robot_canonical_rgb.get_rgb_dict(),
-            **self.__object(object_rgb, num_object_geom)
+            **self.__object()
         }
 
-    def __object(self, object_rgb: list, num_object_geom):
+    def __object(self):
         # import ipdb; ipdb.set_trace()
-        assert len(object_rgb) == num_object_geom
-        rgb_dict = {}
-        for i in range(num_object_geom):
-            rgb_dict["object_geom_vis_{}".format(i)] = object_rgb[i]
-        # print(rgb_dict)
+        # assert len(object_rgb) == num_object_geom
+        rgb_dict = {
+            "object_geom_vis_dice_green"    : [68, 201, 117],
+            "object_geom_vis_dice_red"      : [255, 50, 50],
+            "object_geom_vis_dice_blue"     : [50, 132, 255],
+            "object_geom_vis_dice_yellow"   : [255, 255, 0],
+            "object_geom_vis_dice_orange"   : [255, 178, 56],
+            "object_geom_vis_dice_purple"   : [141, 75, 221],
+        }
         # import ipdb; ipdb.set_trace()
         return rgb_dict
 

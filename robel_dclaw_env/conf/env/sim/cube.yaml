@@ -1,7 +1,7 @@
 env_name   : "sim_cube"
 verbose    : True
 
-model_dir  : "/nfs/monorepo_ral2023/robel_dclaw_env/robel_dclaw_env/domain/environment/model"
+model_dir  : "/nfs/rl-intern2024-HER/robel_dclaw_env/robel_dclaw_env/domain/environment/model"
 model_file : "dclaw3xh_cube.xml"
 env_color  :
 
@@ -9,8 +9,8 @@ inplicit_step                  : 200
 ctrl_interpolation_margin_step : 40
 
 viewer:
-    # is_Offscreen  : False
-    is_Offscreen  : True
+    is_Offscreen  : False
+    # is_Offscreen  : True
 
 target:
     visible: False
@@ -74,4 +74,5 @@ xml:
         object: [
             # ----
             [0, 0, 255], # White
+            [0, 0, 0], # White
         ]

@@ -19,11 +19,13 @@ class CheckEnvDataset:
 
 
         for i in range(3):
+            # import ipdb; ipdb.set_trace()
             env.set_xml_path(xml_path)
             env.load_model()
             env.reset(init_state)
 
             # for k in range(5):
+            # import ipdb; ipdb.set_trace()
             env.set_task_space_ctrl(task_space_position_init)
             env.step(is_view=True)
 
@@ -34,8 +36,13 @@ class CheckEnvDataset:
             # ---
             # import ipdb; ipdb.set_trace()
             for t in range(20):
-                render = env.render()    # ; print(render)
+                # render = env.render()    # ; print(render)
                 state  = env.get_state() # ; print(state)
+
+                # import ipdb; ipdb.set_trace()
+                print("object_rotation = [{:.3f}, {:.3f}, {:.3f}]".format(
+                    *state["object_rotation"].value))
+
                 env.view()
                 # ---
                 # ud                   = np.zeros_like(task_space_position_init.value)
@@ -45,14 +52,14 @@ class CheckEnvDataset:
                 task_space_diff_ctrl = TaskSpaceDiffValueObject(ud)
                 task_space_ctrl      = state["task_space_position"] + task_space_diff_ctrl
                 ctrl                 = env.set_task_space_ctrl(task_space_ctrl)
-                print("step t = {} : ctrl = {}".format(t, task_space_ctrl.value.squeeze()))
+                # print("step t = {} : ctrl = {}".format(t, task_space_ctrl.value.squeeze()))
                 # ----
                 env.step(is_view=True)
                 # import ipdb; ipdb.set_trace()
                 # ---
-                image_saver.append(render["canonical"].value)
+                # image_saver.append(render["canonical"].value)
 
-            image_saver.save_as_gif(save_path="./env_cube_camera_pattern{}.gif".format(i), duration=100)
+            # image_saver.save_as_gif(save_path="./env_cube_camera_pattern{}.gif".format(i), duration=100)
 
 
 if __name__ == '__main__':

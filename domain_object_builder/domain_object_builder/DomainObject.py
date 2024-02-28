@@ -28,8 +28,8 @@ class DomainObject:
         self.init_state = init_state
 
     def set_env(self, env):
-        from robel_dclaw_env.domain.environment.instance.simulation.base_environment import AbstractEnvironment
-        self.env : AbstractEnvironment = env
+        from robel_dclaw_env.domain.environment.instance.simulation.cube.CubeSimulationEnvironment import CubeSimulationEnvironment
+        self.env : CubeSimulationEnvironment = env
 
     def set_TaskSpaceValueObject(self, TaskSpaceValueObject):
         self.TaskSpaceValueObject = TaskSpaceValueObject

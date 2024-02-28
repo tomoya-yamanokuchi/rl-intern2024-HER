@@ -2,7 +2,14 @@
 <mujocoinclude name="pushing_object">
 	<joint name="object_jnt" type="free"/>
 	<body name="pushing_object" pos="0 0 0" euler="0 0 0">
-		<geom type="box" size="0.03 0.03 0.03" pos="0 0 0" class="pushing_object_viz" name="object_geom_vis_0" material="object_geom_vis_0_mat"/>
+		<!-- <geom type="box" size="0.03 0.03 0.03" pos="0 0 0" class="pushing_object_viz" name="object_geom_vis_0" material="object_geom_vis_0_mat"/> -->
 		<geom type="box" size="0.03 0.03 0.03" pos="0 0 0" class="pushing_object_phy" mass="0.1" friction="0.2 0.001 0.0001"/>
+
+		<geom type="box" size="0.0005 0.03 0.03"  	class="pushing_object_viz" name="object_geom_vis_dice_green"  pos="-0.03 0 0"   material="dice_roll_1_mat"/>
+		<geom type="box" size="0.03 0.0005 0.03"  	class="pushing_object_viz" name="object_geom_vis_dice_red" 	  pos="0.0 -0.03 0" material="dice_roll_2_mat"/>
+		<geom type="box" size="0.03 0.03 0.0005"  	class="pushing_object_viz" name="object_geom_vis_dice_blue"	  pos="0 0 0.03"    material="dice_roll_3_mat"/>
+		<geom type="box" size="0.03 0.0005 0.03"   	class="pushing_object_viz" name="object_geom_vis_dice_yellow" pos="0.0  0.03 0" material="dice_roll_4_mat"/>
+		<geom type="box" size="0.0005 0.03 0.03" 	class="pushing_object_viz" name="object_geom_vis_dice_orange" pos="0.03 0 0"  	material="dice_roll_5_mat"/>
+		<geom type="box" size="0.03 0.03 0.0005"   	class="pushing_object_viz" name="object_geom_vis_dice_purple" pos="0 0 -0.03"   material="dice_roll_6_mat"/>
 	</body>
 </mujocoinclude>

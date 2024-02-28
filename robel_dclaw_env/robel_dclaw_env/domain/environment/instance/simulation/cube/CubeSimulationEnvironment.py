@@ -39,6 +39,7 @@ class CubeSimulationEnvironment(AbstractEnvironment):
     def load_model(self):
         # assert self.xml_str is not None
         print("self.xml_path = {}".format(self.xml_path))
+        # import ipdb; ipdb.set_trace()
         self.model             = self.base_env.load_model_from_path(self.xml_path)
         sim                    = mujoco_py.MjSim(self.model)
         self.base_env.set_sim(sim)
@@ -46,6 +47,7 @@ class CubeSimulationEnvironment(AbstractEnvironment):
         self.base_env.view()
         self.object_geom_names = get_object_geom_names(self.model, self.config.texture.task_relevant_geom_group_name)
         self.canonical_rgb     = self.canonical_rgb_manager.get_rgb_dict(self.config.xml.rgb.object, num_object_geom=len(self.object_geom_names))
+
         self.base_env.build_render(self.canonical_rgb)
         self.setState          = SetState(self.base_env.sim, self.task_space_transformer)
         self.getState          = GetState(self.base_env.sim, StateFactory, self.task_space_transformer)
@@ -63,6 +65,7 @@ class CubeSimulationEnvironment(AbstractEnvironment):
         if xml_path is None:
             xml_path = os.path.join(self.config.model_dir, self.config.model_file)
         if self.base_env.sim is None:
+            import ipdb; ipdb.set_trace()
             self.load_model()
         self.base_env.sim.reset()
         self.set_state(state)

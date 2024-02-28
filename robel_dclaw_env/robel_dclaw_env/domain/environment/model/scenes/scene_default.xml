@@ -121,6 +121,22 @@
 		<texture name="object_geom_vis_3_tex" type="2d" file="./pattern/pattern_default_crop.png" rgb1="1 1 1"/>
 		<material name="object_geom_vis_3_mat" shininess="0.03" specular="0.75" texture="object_geom_vis_3_tex"/>
 
+    <!-- Dice -->
+    <texture name="dice_roll_1_tex" type="2d" file="./pattern/pattern_default_crop.png" rgb1="1 1 1"/>
+    <texture name="dice_roll_2_tex" type="2d" file="./pattern/pattern_default_crop.png" rgb1="1 1 1"/>
+    <texture name="dice_roll_3_tex" type="2d" file="./pattern/pattern_default_crop.png" rgb1="1 1 1"/>
+    <texture name="dice_roll_4_tex" type="2d" file="./pattern/pattern_default_crop.png" rgb1="1 1 1"/>
+    <texture name="dice_roll_5_tex" type="2d" file="./pattern/pattern_default_crop.png" rgb1="1 1 1"/>
+    <texture name="dice_roll_6_tex" type="2d" file="./pattern/pattern_default_crop.png" rgb1="1 1 1"/>
+
+
+    <material name="dice_roll_1_mat" shininess="0.03" specular="0.75" texture="dice_roll_1_tex"></material>
+    <material name="dice_roll_2_mat" shininess="0.03" specular="0.75" texture="dice_roll_2_tex"></material>
+    <material name="dice_roll_3_mat" shininess="0.03" specular="0.75" texture="dice_roll_3_tex"></material>
+    <material name="dice_roll_4_mat" shininess="0.03" specular="0.75" texture="dice_roll_4_tex"></material>
+    <material name="dice_roll_5_mat" shininess="0.03" specular="0.75" texture="dice_roll_5_tex"></material>
+    <material name="dice_roll_6_mat" shininess="0.03" specular="0.75" texture="dice_roll_6_tex"></material>
+
     <!-- <material name="FFL12_optoforce_base_mat" shininess="0.03" specular="0.75" texture="FFL12_optoforce_base_tex"></material> -->
   </asset>
 

@@ -1,1 +1,0 @@
-from .FilteringMoelDomainObjectDirector import FilteringMoelDomainObjectDirector

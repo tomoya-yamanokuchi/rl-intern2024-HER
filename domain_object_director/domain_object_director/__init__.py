@@ -1,26 +1,2 @@
-# from .model import *
-# from .lit_model import *
-# from .lit_model_load import *
-# from .lit_ensemble import *
-# from .iCEMRolloutDomainObjectDirector import iCEMRolloutDomainObjectDirector
-# from .MPCDomainObjectDirector import MPCDomainObjectDirector
-# from .NormalRolloutDomainObjectDirector import NormalRolloutDomainObjectDirector
-# from .CheckEnvDatasetDirector import CheckEnvDatasetDirector
+from .AbstractDomainObjectDirector import AbstractDomainObjectDirector
 from .CheckEnvRolloutDirector import CheckEnvRolloutDirector
-# from .RandomCtrlDataCollectionObjectDirector import RandomCtrlDataCollectionObjectDirector
-# from .LoadRandomCtrlDatasetDirector import LoadRandomCtrlDatasetDirector
-# from .LoadEnsembleDatasetDirector import LoadEnsembleDatasetDirector
-# from .GenerateNewXMLModelObjectDirector import GenerateNewXMLModelObjectDirector
-# from .EnsembleTrainingDirector import EnsembleTrainingDirector
-# from .ModelTrainingDirector import ModelTrainingDirector
-# from .ContentVisualizationDirector import ContentVisualizationDirector
-# from .FixedMotionEncodedContentImageGenerationDirector import FixedMotionEncodedContentImageGenerationDirector
-# from .LatentDynamicsDataCollectionDirector import LatentDynamicsDataCollectionDirector
-# from .ModelPredictionErrorEvaluationDirector import ModelPredictionErrorEvaluationDirector
-# from .ModelPredictionWithDifferentContentDirector import ModelPredictionWithDifferentContentDirector
-# from .ModelFilteringErrorEvaluationDirector import ModelFilteringErrorEvaluationDirector
-# from .ModelEvaluationDirector import ModelEvaluationDirector
-# from .LoadedCtrlDataCollectionObjectDirector import LoadedCtrlDataCollectionObjectDirector
-# from .ContentAwareModelPredictionDirector import ContentAwareModelPredictionDirector
-# from .RandomCtrlDataCollectionObjectDirectorWithFixedInitialMotion import RandomCtrlDataCollectionObjectDirectorWithFixedInitialMotion
-# from .ContentAwareModelPredictionDirector_fixedinitctrl import ContentAwareModelPredictionDirector_fixedinitctrl
