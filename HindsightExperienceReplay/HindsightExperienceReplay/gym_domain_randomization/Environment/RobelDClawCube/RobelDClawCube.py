@@ -53,6 +53,8 @@ class RobelDClawCube(object):
             action = self.mapping_action_discrete2continues(action)
         if self.ACTION_MAPPING_FLAG:
             action = self.mapping_action(action)
+
+        import ipdb; ipdb.set_trace()
         next_state, reward, done, domain_parameter, task_achievement = self.env.step(
             action)
 

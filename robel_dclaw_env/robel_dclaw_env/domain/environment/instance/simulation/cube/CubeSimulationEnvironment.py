@@ -104,4 +104,5 @@ class CubeSimulationEnvironment(AbstractEnvironment):
         self.setTargetPosition.set_target_position(target_position)
 
     def step(self, is_view=False):
+        import ipdb; ipdb.set_trace()
         self.base_env.step(is_view)
