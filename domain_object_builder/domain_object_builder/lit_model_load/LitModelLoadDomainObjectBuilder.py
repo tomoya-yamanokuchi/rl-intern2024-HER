@@ -1,6 +1,6 @@
 from omegaconf import DictConfig
 from .LitModelLoadDomainObject import LitModelLoadDomainObject
-from cdsvae.domain.model import AbstractLitModel, LitModelFactory, AbstractModel
+# from cdsvae.domain.model import AbstractLitModel, LitModelFactory, AbstractModel
 from domain_object_builder.lit_model import LitModelDomainObjectBuilder
 from domain_object_director.lit_model import LitMoelDomainObjectDirector
 from domain_object_builder.model import ModelDomainObject

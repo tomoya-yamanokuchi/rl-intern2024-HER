@@ -11,9 +11,10 @@ class RobelDClawCube(object):
     """
 
     def __init__(self, userDefinedSettings, domain_range=None):
+
         self.userDefinedSettings = userDefinedSettings
         self.env = RobelDClawCubeDomainRandomization(
-            userDefinedSettings, domain_range)
+            mujoco_env, userDefinedSettings, domain_range)
         self.action_space = self.env.action_space
         self.observation_space = self.env.observation_space
         self.DOMAIN_PARAMETER_DIM = self.env.get_domain_parameter_dim()

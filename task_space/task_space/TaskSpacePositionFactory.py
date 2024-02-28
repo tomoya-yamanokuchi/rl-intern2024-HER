@@ -5,6 +5,7 @@ from .end_effector_2d.end_effector_2d_value_object import TaskSpacePosition_2D_P
 class TaskSpacePositionFactory:
     @staticmethod
     def create(env_name):
-        if "valve"   in env_name: return TaskSpacePositionValue_1D_Manifold
-        if "pushing" in env_name: return TaskSpacePosition_2D_Plane
+        # if "valve"   in env_name: return TaskSpacePositionValue_1D_Manifold
+        # if "pushing" in env_name: return TaskSpacePosition_2D_Plane
+        return TaskSpacePosition_2D_Plane
         raise NotImplementedError()

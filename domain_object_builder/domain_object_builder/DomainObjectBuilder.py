@@ -18,7 +18,7 @@ class DomainObjectBuilder:
         from .DomainObject import DomainObject
         self.domain_object = DomainObject()
         # ---
-        self.domain_object.set_config_eval(config_eval)
+        # self.domain_object.set_config_eval(config_eval)
 
     '''
         config

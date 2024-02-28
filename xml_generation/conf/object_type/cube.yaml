@@ -1,0 +1,43 @@
+name : "cube"
+# ---
+x_half_size : 0.005
+y_half_size : 0.04
+z_half_size : 0.005
+
+# ------ trajectory level Left COG --------
+# mass : [0.1,  0.01, 0.01, 0.01] # left-1
+# mass : [0.1,  0.01, 0.1, 0.01]  # left-2
+# mass : [0.04,  0.2, 0.1, 0.01]  # left-3
+# mass : [0.05,  0.2, 0.1, 0.04]  # left-4
+# mass : [0.01,  0.2, 0.15, 0.01] # left-5
+# ------ trajectory level Center COG ------
+# mass : [0.1, 0.1, 0.1, 0.1]     # center-6
+# mass : [0.01, 0.1, 0.1, 0.01]   # center-7
+# mass : [0.01, 0.01, 0.01, 0.01] # center-8
+# ------ trajectory level Right COG ------
+# mass : [0.056,  0.1, 0.01, 0.1] # right-9
+# mass : [0.05,  0.1, 0.01, 0.1]  # right-10
+# mass : [0.04,  0.1, 0.2, 0.05]  # right-11
+# mass : [0.037,  0.1, 0.01, 0.1] # right-12
+# mass : [0.01,  0.1, 0.2, 0.04]  # right-13
+# mass : [0.013,  0.1, 0.01, 0.1] # right-14
+# mass : [0.01,  0.01, 0.01, 0.1] # right-15
+# ---------------------------------------
+
+
+# ------ contnt level Left COG --------
+mass : [0.1,  0.01, 0.01, 0.01] # left-1
+# mass : [0.1,  0.01, 0.1, 0.01]  # left-2
+# mass : [0.04,  0.2, 0.1, 0.01]  # left-3
+# # ------ trajectory level Center COG ------
+# mass : [0.1, 0.1, 0.1, 0.1]     # center-4
+# # ------ contnt level Right COG --------
+# mass : [0.01,  0.1, 0.2, 0.04]  # right-5
+# mass : [0.01, 0.1, 0.01, 0.1]   # right-6
+# mass : [0.01,  0.01, 0.01, 0.1] # right-7
+
+
+# ------
+sliding_friction   : 0.2 # 1
+torsional_friction : 0.001 # 0.005
+rolling_friction   : 0.0001 #0.0001

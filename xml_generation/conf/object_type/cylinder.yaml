@@ -1,0 +1,9 @@
+name : "cylinder"
+# ---
+radius      : 0.022
+half_length : 0.01
+# ---
+mass               : 0.05
+sliding_friction   : 0.05
+torsional_friction : 0.001
+rolling_friction   : 0.0001

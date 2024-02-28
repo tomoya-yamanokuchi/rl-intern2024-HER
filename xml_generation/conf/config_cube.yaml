@@ -1,0 +1,7 @@
+defaults:
+  - _self_
+  # - object_type : random
+  # - object_type : cylinder
+  # - object_type : rectangular
+  - object_type : cube
+

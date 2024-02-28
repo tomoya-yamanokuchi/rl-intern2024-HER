@@ -5,6 +5,7 @@ from .end_effector_2d.end_effector_2d_transformer_numpy import EndEffector2D_Num
 class TransformerNumpyFactory:
     @staticmethod
     def create(env_name):
-        if "valve"   in env_name: return Manifold1D_Transformer_Numpy()
-        if "pushing" in env_name: return EndEffector2D_Numpy()
+        # if "valve"   in env_name: return Manifold1D_Transformer_Numpy()
+        # if "pushing" in env_name: return EndEffector2D_Numpy()
+        return EndEffector2D_Numpy()
         raise NotImplementedError()

@@ -51,8 +51,8 @@ class CubeSimulationEnvironment(AbstractEnvironment):
         self.getState          = GetState(self.base_env.sim, StateFactory, self.task_space_transformer)
         # self.surfaceCoords     = GetSurfaceCoordinates(self.base_env.sim)
         self.setCtrl           = SetCtrl(self.base_env, self.task_space_transformer)
-        self.setTargetPosition = PushingTarget(self.base_env.sim)
-        self.setTargetPosition.set_target_visible(self.config.target.visible)
+        # self.setTargetPosition = PushingTarget(self.base_env.sim)
+        # self.setTargetPosition.set_target_visible(self.config.target.visible)
         RobotDynamicsParameter(self.base_env.sim).set(self.config.dynamics.robot)
         PushingObjectDyanmicsParameter(self.base_env.sim).set(self.config.dynamics.object)
         RobotJointRange(self.base_env.sim).set_range(**self.config.joint_range.robot)
@@ -104,5 +104,5 @@ class CubeSimulationEnvironment(AbstractEnvironment):
         self.setTargetPosition.set_target_position(target_position)
 
     def step(self, is_view=False):
-        import ipdb; ipdb.set_trace()
+        # import ipdb; ipdb.set_trace()
         self.base_env.step(is_view)

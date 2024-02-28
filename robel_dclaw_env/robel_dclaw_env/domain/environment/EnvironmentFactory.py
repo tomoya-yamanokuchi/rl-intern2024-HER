@@ -21,6 +21,7 @@ class EnvironmentFactory:
         # if   env_name == "sim_valve"               : return (ValveSimulationEnvironment, ValveStateFactory)
         # if   env_name == "sim_pushing"             : return (PushingSimulationEnvironment, PushingStateFactory)
         # if   env_name == "sim_rectangular_pushing" : return (RectangularPushingSimulationEnvironment, PushingStateFactory)
+        # import ipdb; ipdb.set_trace()
         if   env_name == "sim_cube"                : return (CubeSimulationEnvironment, CubeStateFactory)
         # elif env_name == "real"          : return DClawRealEnvironment
         raise NotImplementedError()

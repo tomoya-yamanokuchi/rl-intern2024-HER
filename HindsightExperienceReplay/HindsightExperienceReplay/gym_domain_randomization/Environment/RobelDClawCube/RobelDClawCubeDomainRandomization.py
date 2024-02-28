@@ -5,8 +5,9 @@ import numpy as np
 from os import path
 
 from .RobelDClawCubeDomainInfo import RobelDClawCubeDomainInfo
+from HindsightExperienceReplay import UserDefinedSettingsFactory
 
-from robel_dclaw_env.domain.environment.instance.simulation.cube.CubeSimulationEnvironment import CubeSimulationEnvironment
+from robel_dclaw_env.domain.environment.instance.simulation.cube.CubeSimulationEnvironment import CubeSimulationEnvironment as Env
 
 
 
@@ -21,7 +22,11 @@ class RobelDClawCubeDomainRandomization(gym.Env):
         'video.frames_per_second': 30
     }
 
-    def __init__(self, userDefinedSettings, domain_range=None):
+    def __init__(self, mujoco_env: Env, userDefinedSettings: UserDefinedSettingsFactory, domain_range=None):
+
+
+        self.env = mujoco_env
+
         self.userDefinedSettings = userDefinedSettings
         self.domainInfo = RobelDClawCubeDomainInfo(userDefinedSettings, domain_range)
 
@@ -80,6 +85,8 @@ class RobelDClawCubeDomainRandomization(gym.Env):
         done = False
         self.step_num += 1  # 終わってから追加
         return observation, reward, done, domain_parameter, task_achievement
+
+
 
     def calc_reward(self, th, thdot, u):
         ver = 1  # 0:origin, over1:mine
