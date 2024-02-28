@@ -1,0 +1,74 @@
+env_name   : "sim_pushing"
+verbose    : True
+
+model_dir  : "/nfs/monorepo_ral2023/robel_dclaw_env/robel_dclaw_env/domain/environment/model"
+model_file : "dclaw3xh_pushing.xml"
+env_color  :
+
+inplicit_step                  : 200
+ctrl_interpolation_margin_step : 40
+
+viewer:
+    is_Offscreen  : True
+
+target:
+    visible: False
+
+render:
+    camera_name_list : ["random_nonfix", "canonical"]
+    width_capture    : 64
+    height_capture   : 64
+
+texture:
+    randomization_mode           : "per_step"
+    is_dynamc_noise              : False
+    task_relevant_geom_group_name: "object_geom_vis"
+    force_default_canonical      : True
+
+joint_range:
+    robot:
+        lower_bound: [-0.51, -1.70, -2.00]
+        upper_bound: [ 1.60,  1.70,  2.00]
+    object:
+        lower_bound:
+        upper_bound:
+
+init_state:
+    # task_space_position: [0.5, 0.0,  0.5, 0.0,  0.5, 0.0]
+    task_space_position: [0.0, 0.6,  0.5, 0.0,  0.5, 0.0]
+    robot_velocity     : [0.0, 0.0, 0.0,   0.0, 0.0, 0.0,   0.0, 0.0, 0.0]
+    object_position    : [0.04, 0.0, 0.0, 1, 0, 0, 0]
+    # object_position  : [vertival, horizon, 0.0, 1, 0, 0, 0]
+    object_velocity    : [0, 0, 0, 0, 0, 0]
+    # ---
+    time               : 0.0 # MjSImState
+    act                :     # MjSImState
+    udd_state          : {}  # MjSImState
+
+dynamics:
+    robot:
+        kp_claw           : 20.0
+        damping_claw      : 0.1625
+        frictionloss_claw : 0.05
+    object:
+
+camera:
+    x_coordinate : 0.0
+    y_coordinate : 0.0
+    z_distance   : 0.192
+    orientation  : 0.0
+
+    # x_coordinate : 0
+    # y_coordinate : 0
+    # orientation  : 30
+    # z_distance   : 0.5
+
+light:
+    light1 : 0
+    light2 : 16
+
+xml:
+    rgb:
+        # object: [255, 0, 0] # red
+        # object: [0, 255, 0] # green
+        object: [0, 0, 255] # blue

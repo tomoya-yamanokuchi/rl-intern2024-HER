@@ -1,0 +1,9 @@
+save_dir_path : "/nfs/monorepo_ral2023"
+save_dir_name : "env_dataset"
+# ---
+# dataset_name  : "inu_cylinder_radius_12mm_remote_3090_1"
+# dataset_name  : "inu_cylinder_radius_18mm"
+# dataset_name  : "inu_cylinder_radius_8mm_dl-box"
+# dataset_name : "unknown_object_5size"
+# dataset_name  : "rectangular700"
+dataset_name  : "kotori_rectangular_2450seq_from_loaded_ctrl_replay"

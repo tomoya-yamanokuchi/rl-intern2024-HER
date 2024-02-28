@@ -1,0 +1,12 @@
+model:
+  # group       : "doctral_seed"
+  group       : "kotori_rectangular_2450seq_stable"
+  # ---
+  search_key : "20240112095119"
+  # ----
+  checkpoints : "epoch=199.ckpt"
+  # checkpoints : "epoch=99.ckpt"
+  # checkpoints : "last.ckpt"
+
+ensemble:
+  checkpoints : "last.ckpt"

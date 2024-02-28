@@ -1,0 +1,9 @@
+model:
+  group       : "ral2023"
+  search_key  : "20230901020851" # xoxo_and_popo_1000
+  checkpoints : "last.ckpt"
+
+ensemble:
+  group       : "dynamics_model_probabilistic_ensemble"
+  name        : "[id=20230831134510]-[model_class=dynamics_model_probabilistic_ensemble]-[dataset=xoxo_and_popo_1000]-[pc=dl-box]-"
+  checkpoints : "last.ckpt"

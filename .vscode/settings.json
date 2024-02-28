@@ -1,0 +1,53 @@
+{
+    "python.languageServer"           : "Pylance",
+    "python.pythonPath"               : "/usr/local/bin/python3.8",
+    "editor.fontFamily"               : "Ubuntu Mono",
+    "editor.tabSize"                  : 4,
+    "window.zoomLevel"                : 2.2,
+    "editor.fontSize"                 : 18,
+    "debug.console.fontSize"          : 18,
+    "terminal.integrated.fontSize"    : 18,
+    "workbench.tree.indent"           : 25, // exploreに表示されるファイル一覧のインデント幅
+    "editor.insertSpaces"             : true,
+
+    "python.testing.pytestEnabled"   : false,
+    "python.testing.nosetestsEnabled": false,
+
+    "python.autoComplete.extraPaths":[
+        // "/home/tomoya-y/.local/lib/python3.8/site-packages",
+        "/home/tomoya-y/.local/lib/python3.8/site-packages",
+    ],
+
+    // exploreに表示しないファイル・ディレクトリ
+    "files.exclude": {
+        "logs"                          : true,
+        "figs"                          : true,
+        "logs_sprite"                   : true,
+        "summary"                       : true,
+        "judges"                        : true,
+        "test_aggregation"              : true,
+        "performance_correlation"       : true,
+        "performance_boxplot"           : true,
+        "outputs"                       : true,
+        "summary_fig"                   : true,
+        "gif"                           : true,
+        "dist"                          : true,
+        "build"                         : true,
+        "iCEM"                          : true,
+        "dataset"                       : true,
+        "icem_rollout_progress_dataset" : true,
+        "**/*.png"                      : true,
+    },
+
+    // << trailing-spaces >>
+    "trailing-spaces.backgroundColor": "rgba(255,0,0,0.0)",
+    "trailing-spaces.trimOnSave"     : true,
+
+    "indentOneSpace.workOnSingleLine" : true,    // Even if 1 character on 1 line is selected - the command will work.
+    "indentOneSpace.cramReversed"     : true,    // Outdent lines even if one of them has reached column 0 (gutter).
+    "indentOneSpace.onlyCompleteRange": false,
+    "python.analysis.extraPaths": [
+        "/home/tomoya-y/.local/lib/python3.8/site-packages"
+        // "/home/tomoya-y/.local/lib/python3.8/site-packages"
+    ], // Indent works only when selection has nothing or whitespace characters on the sides
+}

@@ -1,0 +1,14 @@
+
+# ==============================================================
+#                        evaluator
+# ==============================================================
+group_eval       : "regressor_dclaw_stochastic_keyframe"
+model_eval       : "[regressor_dclaw]-[robel_dclaw_stochastic]-[dim_out=11]-[dim_fc_hidden=256]-[50epoch]-[num_batch=132]-[beta=0.5]-[20230412131255]-[dl-box]-"
+checkpoints_eval : "last.ckpt"
+
+# ==============================================================
+#                        nominal
+# ==============================================================
+nominal:
+    dataset_dir : "/nfs/workspace/robel_dclaw_env/saved_data_icem"
+    dataset_name: "[num_sample=600]-[num_subparticle=20]-[num_cem_iter=7]-[colored_noise_exponent=[0.5, 1.0, 2.0, 3.0, 4.0]]-1682103006.6260257"

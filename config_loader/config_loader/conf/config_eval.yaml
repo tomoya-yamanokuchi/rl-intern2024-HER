@@ -1,0 +1,8 @@
+model_set_load_dir : "/nfs/logs_cdsvae/"
+
+defaults:
+  - _self_
+  - model_set    : multi_object_content_encoded
+  - object_model : dataset
+
+tag : "inu"

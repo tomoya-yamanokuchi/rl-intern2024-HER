@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mujocoinclude name="pushing_object">
+	<joint name="object_jnt" type="free"/>
+	<body name="pushing_object" pos="0 0 0" euler="0 0 0">
+		<geom type="box" size="0.005 0.01 0.005" pos="0 -0.03 0" class="pushing_object_viz" name="object_geom_vis_0" material="object_geom_vis_0_mat"/>
+		<geom type="box" size="0.005 0.01 0.005" pos="0 -0.03 0" class="pushing_object_phy" mass="0.1" friction="0.2 0.001 0.0001"/>
+		<geom type="box" size="0.005 0.01 0.005" pos="0 -0.01 0" class="pushing_object_viz" name="object_geom_vis_1" material="object_geom_vis_1_mat"/>
+		<geom type="box" size="0.005 0.01 0.005" pos="0 -0.01 0" class="pushing_object_phy" mass="0.01" friction="0.2 0.001 0.0001"/>
+		<geom type="box" size="0.005 0.01 0.005" pos="0  0.01 0" class="pushing_object_viz" name="object_geom_vis_2" material="object_geom_vis_2_mat"/>
+		<geom type="box" size="0.005 0.01 0.005" pos="0  0.01 0" class="pushing_object_phy" mass="0.01" friction="0.2 0.001 0.0001"/>
+		<geom type="box" size="0.005 0.01 0.005" pos="0  0.03 0" class="pushing_object_viz" name="object_geom_vis_3" material="object_geom_vis_3_mat"/>
+		<geom type="box" size="0.005 0.01 0.005" pos="0  0.03 0" class="pushing_object_phy" mass="0.01" friction="0.2 0.001 0.0001"/>
+	</body>
+</mujocoinclude>

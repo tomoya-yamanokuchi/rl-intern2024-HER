@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<mujoco model="dclaw3xh_pushing">
+  <include file="./scenes/scene_default.xml"/>
+  <include file="./robot/assets/dependencies_3xh_position.xml"/>
+  <include file="./cube/dependencies_pushing_object.xml"/>
+
+  <size njmax="8000" nconmax="4000"/>
+
+  <worldbody>
+    <camera name="canonical"            mode= "fixed" euler="0 0 1.5707963267948966" pos="0 0 0.192"/>
+    <camera name="random"               mode= "fixed" euler="0 0 1.5707963267948966" pos="0 0 0.192"/>
+    <camera name="canonical_nonfix"     mode= "fixed" euler="0 0 1.5707963267948966" pos="0 0 0.192"/>
+    <camera name="random_nonfix"        mode= "fixed" euler="0 0 1.5707963267948966" pos="0 0 0.192"/>
+    <camera name="canonical_overview"   mode= "fixed" euler="0 1 1.57" pos="0.3 0 0.4"/>
+    <camera name="top"                  mode= "fixed" euler="0 0 1.57" pos="0 0 3"/>
+
+
+    <body name="mount" pos="0 0 0.195" euler="0 0 0">
+      <include file="./robot/assets/chain3xh_default.xml"/>
+      <include file="./robot/assets/chain3xh_overlay.xml"/>
+    </body>
+
+    <body name="object1" pos="0 0 0.03">
+      <include file="./cube/object_current.xml"/>
+    </body>
+
+  </worldbody>
+</mujoco>

@@ -1,0 +1,14 @@
+**/outputs/
+**/*.egg-info/
+**/*.Trash*/
+**/*saved_model*/
+*.pyc
+*.mp4
+*.png
+*.pdf
+*.log
+*.gif
+*.npy
+*.pt
+**/*.db
+env_dataset

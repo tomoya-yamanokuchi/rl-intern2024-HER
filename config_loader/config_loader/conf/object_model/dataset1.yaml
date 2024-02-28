@@ -1,0 +1,4 @@
+save_dir_path : "/nfs/monorepo_ral2023"
+save_dir_name : "env_dataset"
+# ---
+dataset_name  : "xoxo500"
