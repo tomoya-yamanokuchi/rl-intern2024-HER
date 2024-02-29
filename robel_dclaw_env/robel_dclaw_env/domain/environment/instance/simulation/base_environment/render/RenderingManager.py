@@ -28,7 +28,7 @@ class RenderingManager:
 
     def render(self) -> RenderImageDict:
         return RenderImageDict(
-            random_nonfix = self.ran_rendering.render(), # 順番もしかすると大事かも
+            # random_nonfix = self.ran_rendering.render(), # 順番もしかすると大事かも
             canonical     = self.can_rendering.render(),
         )
 

@@ -10,11 +10,11 @@ class RobelDClawCube(object):
     default max step length: 200 -> learning max step length: 150
     """
 
-    def __init__(self, userDefinedSettings, domain_range=None):
+    def __init__(self, domain_object, userDefinedSettings, domain_range=None):
 
         self.userDefinedSettings = userDefinedSettings
         self.env = RobelDClawCubeDomainRandomization(
-            mujoco_env, userDefinedSettings, domain_range)
+            domain_object, userDefinedSettings, domain_range)
         self.action_space = self.env.action_space
         self.observation_space = self.env.observation_space
         self.DOMAIN_PARAMETER_DIM = self.env.get_domain_parameter_dim()
@@ -55,7 +55,7 @@ class RobelDClawCube(object):
         if self.ACTION_MAPPING_FLAG:
             action = self.mapping_action(action)
 
-        import ipdb; ipdb.set_trace()
+        # import ipdb; ipdb.set_trace()
         next_state, reward, done, domain_parameter, task_achievement = self.env.step(
             action)
 

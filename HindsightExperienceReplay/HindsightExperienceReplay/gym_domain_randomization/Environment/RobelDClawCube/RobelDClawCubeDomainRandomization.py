@@ -8,7 +8,7 @@ from .RobelDClawCubeDomainInfo import RobelDClawCubeDomainInfo
 from HindsightExperienceReplay import UserDefinedSettingsFactory
 
 from robel_dclaw_env.domain.environment.instance.simulation.cube.CubeSimulationEnvironment import CubeSimulationEnvironment as Env
-
+from domain_object_builder import DomainObject
 
 
 class RobelDClawCubeDomainRandomization(gym.Env):
@@ -22,10 +22,17 @@ class RobelDClawCubeDomainRandomization(gym.Env):
         'video.frames_per_second': 30
     }
 
-    def __init__(self, mujoco_env: Env, userDefinedSettings: UserDefinedSettingsFactory, domain_range=None):
+    def __init__(self, domain_object: DomainObject, userDefinedSettings: UserDefinedSettingsFactory, domain_range=None):
 
+        self.env                      = domain_object.env
+        self.init_state               = domain_object.init_state
+        self.TaskSpaceValueObject     = domain_object.TaskSpaceValueObject
+        self.TaskSpaceDiffValueObject = domain_object.TaskSpaceDiffValueObject
+        self.xml_path                 = domain_object.original_xml_path
+        self.task_space_position_init = self.init_state["task_space_position"]
 
-        self.env = mujoco_env
+        # import ipdb; ipdb.set_trace()
+        # -------------------------------------------------
 
         self.userDefinedSettings = userDefinedSettings
         self.domainInfo = RobelDClawCubeDomainInfo(userDefinedSettings, domain_range)
@@ -115,24 +122,37 @@ class RobelDClawCubeDomainRandomization(gym.Env):
     def get_domain_parameter_dim(self):
         return self.domainInfo.get_domain_parameters().shape[0]
 
+
     def reset(self):
         self.step_num = 0
-        high = np.array([np.pi, 1])
-        self.state = self.np_random.uniform(low=-high, high=high)
         self.last_u = None
+        # ---
+        self.env.set_xml_path(self.xml_path)
+        self.env.load_model()
+        self.env.reset(self.init_state)
+        self.env.set_task_space_ctrl(self.task_space_position_init)
+        self.env.step(is_view=True)
+        self.env.render()
+        # ---
+        self.state = self.env.get_state()
+        # ---
+        # import ipdb; ipdb.set_trace()
         return self._get_obs()
 
     def _get_obs(self):
-        if False:
-            theta, thetadot = self.state
-            return np.array([np.cos(theta), np.sin(theta), thetadot])
-        else:
-            theta, thetadot = self.state
-            obs = {}
-            obs['observation'] = np.array([np.cos(theta), np.sin(theta), thetadot])
-            obs['achieved_goal'] = np.array([np.cos(theta), np.sin(theta), thetadot])
-            obs['desired_goal'] = self.ideal_goal
-            return obs
+        task_space_robot_position = self.state['task_space_position']
+        dice_position             = self.state['object_position']
+        dice_rotation             = self.state['object_rotation']
+
+        import ipdb; ipdb.set_trace()
+        # ----
+        obs = {}
+        # ---
+        obs['observation']   = np.array([])
+        # ---
+        obs['achieved_goal'] = np.array([np.cos(theta), np.sin(theta), thetadot])
+        obs['desired_goal']  = self.ideal_goal
+        return obs
 
     def _render(self, mode='human', close=False):
         if close:

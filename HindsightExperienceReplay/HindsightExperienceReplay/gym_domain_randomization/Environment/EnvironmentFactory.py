@@ -12,4 +12,11 @@ class EnvironmentFactory():
 
         if self.ENVIRONMENT_NAME == 'RobelDClawCube':
             from .RobelDClawCube.RobelDClawCube import RobelDClawCube
-            return RobelDClawCube(self.userDefinedSettings)
+            from domain_object_builder import DomainObjectBuilder
+            from domain_object_director import CheckEnvRolloutDirector
+            # ---
+            builder       = DomainObjectBuilder()
+            director      = CheckEnvRolloutDirector()
+            domain_object = director.construct(builder, env_name="sim/cube")
+
+            return RobelDClawCube(domain_object, self.userDefinedSettings)
