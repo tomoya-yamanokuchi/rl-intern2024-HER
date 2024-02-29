@@ -69,7 +69,7 @@ def launch(args):
     # get the environment parameters
     env_params = get_env_params(env, env_name)
     # create the ddpg agent to interact with the environment
-    ddpg_trainer = ddpg_agent(args, env, env_params)
+    ddpg_trainer = ddpg_agent(args, env_name, env, env_params)
     ddpg_trainer.learn()
 
 

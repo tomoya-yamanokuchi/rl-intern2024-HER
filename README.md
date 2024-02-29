@@ -14,8 +14,14 @@ sh package_install.sh
 
 4. FetchPush環境でHERの学習が回ることを確認
 ```
-mpirun -np 1 python3.8 -u ./usecase/her/train.py --env-name='FetchPush-v1'  --cuda | tee reach.log
+mpirun -np 1 python3.8 -u ./usecase/her/train.py --env_name='FetchPush-v1'  --cuda | tee reach.log
 ```
 
-5. 学習すると`saved_models`というディレクトリの直下に学習済みモデルが保存されていく
-6. モデルが保存されたらdemo.pyを実行して学習済み方策の挙動を確認
+5. 学習すると`saved_models`というディレクトリの直下に学習済みモデルが時刻名のディレクトリとして保存されていく
+6. モデルが保存されたらargparseで`--env_name`（環境指定）と`--model`（どのモデルをロードするか）のパラメータを指定してdemo.pyを実行して学習済み方策の挙動を確認
+
+
+```
+# 例です
+python3.8 -u ./usecase/her/demo.py --env_name='FetchPush-v1' --model='20240229_16_11_30'
+```

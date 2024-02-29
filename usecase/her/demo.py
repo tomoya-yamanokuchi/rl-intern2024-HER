@@ -1,11 +1,12 @@
+import os
 import torch
-from HindsightExperienceReplay.rl_modules.models import actor
-from HindsightExperienceReplay.arguments import get_args
+from HindsightExperienceReplay import actor
+from HindsightExperienceReplay import get_args
 import gym
 import numpy as np
 
-from HindsightExperienceReplay.gym_domain_randomization.UserDefinedSettings import UserDefinedSettings
-from HindsightExperienceReplay.gym_domain_randomization.Environment.EnvironmentFactory import EnvironmentFactory
+from HindsightExperienceReplay.gym_domain_randomization import UserDefinedSettings
+from HindsightExperienceReplay import EnvironmentFactory
 # process the inputs
 
 
@@ -22,7 +23,12 @@ def process_inputs(o, g, o_mean, o_std, g_mean, g_std, args):
 if __name__ == '__main__':
     args = get_args()
     # load the model param
-    model_path = args.save_dir + args.env_name + '/model.pt'
+    # ------ モデルのロード部分 ------
+    model_path = args.save_dir + args.env_name + "/" +  args.model + '/model.pt'
+    # model_path = os.path.join(str(args.save_dir), str(args.env_name), str(args.model), '/model.pt')
+    print("model_path = ", model_path)
+    # import ipdb; ipdb.set_trace()
+    # -----
     o_mean, o_std, g_mean, g_std, model = torch.load(model_path, map_location=lambda storage, loc: storage)
     # create the environment
     if args.env_name != 'Pendulum':
@@ -35,7 +41,6 @@ if __name__ == '__main__':
         env = environmentFactory.generate(domain_num=domain_num)
     # get the env param
     observation = env.reset()
-
 
     '''
     とりま

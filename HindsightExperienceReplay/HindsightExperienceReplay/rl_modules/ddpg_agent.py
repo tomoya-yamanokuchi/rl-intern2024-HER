@@ -23,9 +23,10 @@ from HindsightExperienceReplay.gym_domain_randomization.Environment.RobelDClawCu
 
 
 class ddpg_agent:
-    def __init__(self, args, env: Environment, env_params):
-        self.args = args
-        self.env = env
+    def __init__(self, args, env_name: str, env: Environment, env_params):
+        self.args       = args
+        self.env_name   = env_name
+        self.env        = env
         self.env_params = env_params
         # create the network
         self.actor_network = actor(env_params)
@@ -50,6 +51,7 @@ class ddpg_agent:
         self.critic_optim = torch.optim.Adam(self.critic_network.parameters(), lr=self.args.lr_critic)
         # her sampler
         self.her_module = her_sampler(self.args.replay_strategy, self.args.replay_k, self.env.compute_reward)
+        self.her_module.set_env_name(env_name)
         # create the replay buffer
         self.buffer = replay_buffer(self.env_params, self.args.buffer_size, self.her_module.sample_her_transitions)
         # create the normalizer
