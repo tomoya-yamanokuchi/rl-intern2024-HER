@@ -102,6 +102,9 @@ class ddpg_agent:
                             pi = self.actor_network(input_tensor)
                             action = self._select_actions(pi)
                         # feed the actions into the environment
+                        # ---
+                        # self.env.render()
+                        # ---
                         observation_new, reward, _, info = self.env.step(action)
                         priority = info['is_success']
                         # next_state, reward, done, info

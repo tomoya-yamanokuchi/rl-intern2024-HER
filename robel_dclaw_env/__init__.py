@@ -3,7 +3,8 @@
 # from .domain import task_space
 
 
-from . import robel_dclaw_env
+# from . import robel_dclaw_env
+from .robel_dclaw_env import *
 
 print("Hello from robel_dclaw_env!")
 

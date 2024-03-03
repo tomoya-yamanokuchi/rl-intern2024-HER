@@ -30,7 +30,7 @@ class RobelDClawCube(object):
         else:
             self.ACTION_DIM = self.env.action_space.shape[0]
 
-        self.MAX_ACTION = self.env.max_torque
+        self.MAX_ACTION = self.env.task_space_max_val
 
         self.domainInfo = self.env.domainInfo
 

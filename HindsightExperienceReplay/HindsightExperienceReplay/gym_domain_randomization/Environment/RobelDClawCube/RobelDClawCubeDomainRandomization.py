@@ -9,6 +9,7 @@ from HindsightExperienceReplay import UserDefinedSettingsFactory
 
 from robel_dclaw_env.domain.environment.instance.simulation.cube.CubeSimulationEnvironment import CubeSimulationEnvironment as Env
 from domain_object_builder import DomainObject
+from service import NTD
 
 
 class RobelDClawCubeDomainRandomization(gym.Env):
@@ -24,7 +25,7 @@ class RobelDClawCubeDomainRandomization(gym.Env):
 
     def __init__(self, domain_object: DomainObject, userDefinedSettings: UserDefinedSettingsFactory, domain_range=None):
 
-        self.env                      = domain_object.env
+        self.env : Env                = domain_object.env
         self.init_state               = domain_object.init_state
         self.TaskSpaceValueObject     = domain_object.TaskSpaceValueObject
         self.TaskSpaceDiffValueObject = domain_object.TaskSpaceDiffValueObject
@@ -38,7 +39,7 @@ class RobelDClawCubeDomainRandomization(gym.Env):
         self.domainInfo = RobelDClawCubeDomainInfo(userDefinedSettings, domain_range)
 
         self.max_speed = 8  # 8
-        self.max_torque = 2.  # 2.
+        self.task_space_max_val = 1.0
         # self.dt = .05
         # self.g = 10.
         # self.m = 1.
@@ -46,12 +47,18 @@ class RobelDClawCubeDomainRandomization(gym.Env):
 
         self.viewer = None
 
+
+        self.action_space = spaces.Box(low=-self.task_space_max_val, high=self.task_space_max_val, shape=(6,))
+
+
         high = np.array([1., 1., self.max_speed])
-        self.action_space = spaces.Box(
-            low=-self.max_torque, high=self.max_torque, shape=(1,))
         self.observation_space = spaces.Box(low=-high, high=high)
 
-        self.ideal_goal = np.array([1., 0., 0.])  # checked [y,x,-]　頂上が0度の設定
+        '''
+        # 原点位置でz軸方向に45度の向きにもっていく
+        # ideal_goal = [x, y, x, z_degree, x_degree?, y_degree?]
+        '''
+        self.ideal_goal = np.array([0, 0, 0, 45, 0., 0.])
 
         self._seed()
 
@@ -63,61 +70,46 @@ class RobelDClawCubeDomainRandomization(gym.Env):
         return [seed]
 
     def _step(self, u):
-        th, thdot = self.state  # th := theta
-
+        # import ipdb; ipdb.set_trace()
         domain_parameter = self.domainInfo.get_domain_parameters()
-        dt, g, m, l, torque_weight, torque_bias = domain_parameter
-
-        u = u * torque_weight + torque_bias  # for using domain randomization
-
-        if self.domainInfo.torque_limit:
-            u = np.clip(u, -self.max_torque, self.max_torque)
-        else:
-            # u = u[0]
-            u = u
-
-        self.last_u = u  # for rendering
-        reward = self.calc_reward(th, thdot, u)
-        task_achievement = self.check_task_achievement(th, thdot, u)
-
-        newthdot = thdot + (-3 * g / (2 * l) *
-                            np.sin(th + np.pi) + 3. / (m * l**2) * u) * dt
-        newth = th + newthdot * dt
-        if self.domainInfo.velocity_limit:
-            newthdot = np.clip(newthdot, -self.max_speed, self.max_speed)
-
-        self.state = np.array([newth, newthdot])
-
+        # ---
+        reward           = self.calc_reward()
+        task_achievement = self.check_task_achievement()
+        # ----
+        self.env.set_task_space_ctrl(self.TaskSpaceValueObject(NTD(u))) # 差分制御にしないと多分ダメ
+        self.env.step() # inplicit_stepの幅の調整も多分必用
+        self.state = self.env.get_state()
+        # ---　固定 ---
         observation = self._get_obs()
         done = False
         self.step_num += 1  # 終わってから追加
         return observation, reward, done, domain_parameter, task_achievement
 
-
-
-    def calc_reward(self, th, thdot, u):
-        ver = 1  # 0:origin, over1:mine
-        if ver == 0:
-            costs = angle_normalize(th)**2 + 0.1 * (thdot**2) + 0.001 * (u**2)
-        elif ver == 1:
-            costs = angle_normalize(th)**2 + 0.1 * abs(thdot) + 0.001 * abs(u)
-
-        reward = -costs
+    def calc_reward(self):
+        '''
+        ・一旦借り置きで常に0を返す
+        ・タスク評価に報酬を使って解析する場合には要追加
+        '''
+        pseudo_costs = 0.0
+        costs        = pseudo_costs
+        reward       = -costs
         return reward
 
-    def check_task_achievement(self, th, thdot, u):
-        theta, thetadot = th, thdot
 
-        state = np.array([np.cos(theta), np.sin(theta), thetadot])
-
-        goal_norm = np.linalg.norm(state-self.ideal_goal)
-
+    def check_task_achievement(self):
+        object_xyz_coordinates = self.state['object_position'].value.squeeze()[:3]
+        object_rotation        = self.state['object_rotation'].value.squeeze()[:3]
+        # ---
+        eval_state = np.concatenate([object_xyz_coordinates, object_rotation], axis=0)
+        goal_norm  = np.linalg.norm(eval_state - self.ideal_goal)
+        # --- 固定 ---
         if goal_norm < self.achievement_threshold:
             task_achievement = 1.
         else:
             task_achievement = 0.
-
+        # ---
         return task_achievement
+
 
     def get_domain_parameter_dim(self):
         return self.domainInfo.get_domain_parameters().shape[0]
@@ -139,52 +131,35 @@ class RobelDClawCubeDomainRandomization(gym.Env):
         # import ipdb; ipdb.set_trace()
         return self._get_obs()
 
-    def _get_obs(self):
-        task_space_robot_position = self.state['task_space_position']
-        dice_position             = self.state['object_position']
-        dice_rotation             = self.state['object_rotation']
 
-        import ipdb; ipdb.set_trace()
+    def _get_obs(self):
+        task_space_robot_position = self.state['task_space_position'].value.squeeze()
+        object_xyz_coordinates    = self.state['object_position'].value.squeeze()[:3]
+        object_rotation           = self.state['object_rotation'].value.squeeze()[:3]
         # ----
         obs = {}
         # ---
-        obs['observation']   = np.array([])
+        obs['observation'] = np.concatenate([
+            task_space_robot_position, # ロボット手先座標位置(2次元 x 3本 = 6次元)
+            object_xyz_coordinates,    # サイコロのxyz座標 (3次元)
+            object_rotation,           # サイコロの回転角度 (3次元)
+        ], axis=0)
         # ---
-        obs['achieved_goal'] = np.array([np.cos(theta), np.sin(theta), thetadot])
+        # import ipdb; ipdb.set_trace()
+        obs['achieved_goal'] = np.concatenate([
+            task_space_robot_position, # ロボット手先座標位置(2次元 x 3本 = 6次元)
+            object_xyz_coordinates,    # サイコロのxyz座標 (3次元)
+            object_rotation,           # サイコロの回転角度 (3次元)
+        ], axis=0)
+        # ---
         obs['desired_goal']  = self.ideal_goal
         return obs
 
+
     def _render(self, mode='human', close=False):
-        if close:
-            if self.viewer is not None:
-                self.viewer.close()
-                self.viewer = None
-            return
 
-        if self.viewer is None:
-            from gym.envs.classic_control import rendering
-            self.viewer = rendering.Viewer(500, 500)
-            self.viewer.set_bounds(-2.2, 2.2, -2.2, 2.2)
-            rod = rendering.make_capsule(1, .2)
-            rod.set_color(.8, .3, .3)
-            self.pole_transform = rendering.Transform()
-            rod.add_attr(self.pole_transform)
-            self.viewer.add_geom(rod)
-            axle = rendering.make_circle(.05)
-            axle.set_color(0, 0, 0)
-            self.viewer.add_geom(axle)
-            # fname = path.join(path.dirname(__file__), "assets/clockwise.png")
-            fname = path.join(path.dirname(__file__), "clockwise.png")
-            self.img = rendering.Image(fname, 1., 1.)
-            self.imgtrans = rendering.Transform()
-            self.img.add_attr(self.imgtrans)
-
-        self.viewer.add_onetime(self.img)
-        self.pole_transform.set_rotation(self.state[0] + np.pi / 2)
-        if self.last_u:
-            self.imgtrans.scale = (-self.last_u / 2, np.abs(self.last_u) / 2)
-
-        return self.viewer.render(return_rgb_array=mode == 'rgb_array')
+        self.env.view()
+        # return self.viewer.render(return_rgb_array=mode == 'rgb_array')
 
 
 def angle_normalize(x):

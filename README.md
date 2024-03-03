@@ -25,3 +25,17 @@ mpirun -np 1 python3.8 -u ./usecase/her/train.py --env_name='FetchPush-v1'  --cu
 # 例です
 python3.8 -u ./usecase/her/demo.py --env_name='FetchPush-v1' --model='20240229_16_11_30'
 ```
+
+___
+## ROBEL DClaw サイコロ環境で動かす場合
+`env_name`パラメータを`RobelDClawCube`と指定してtrain.pyとdemo.pyを上記の通り実行する
+
+・train
+```
+mpirun -np 1 python3.8 -u ./usecase/her/train.py --env_name='RobelDClawCube'  --cuda | tee reach.log
+```
+
+・test
+```
+python3.8 -u ./usecase/her/demo.py --env_name='RobelDClawCube' --model='20240229_16_15_55 (これは例なので自分のロードするモデルのディレクトリ名に合わせてください)'
+```

@@ -89,7 +89,6 @@ if __name__ == '__main__':
 tomoya-y:
 参考リポジトリ : https://github.com/TianhongDai/hindsight-experience-replay
 '''
-# mpirun -np 1 python3.8 -u ./HindsightExperienceReplay/train.py --env-name='Pendulum'  --cuda | tee reach.log
-
-# mpirun -np 1 python3.8 -u ./usecase/her/train.py --env-name='FetchPush-v1'  --cuda | tee reach.log
-# mpirun -np 1 python3.8 -u ./usecase/her/train.py --env-name='RobelDClawCube'  --cuda | tee reach.log
+# mpirun -np 1 python3.8 -u ./usecase/her/train.py --env_name='Pendulum'       --cuda | tee reach.log
+# mpirun -np 1 python3.8 -u ./usecase/her/train.py --env_name='FetchPush-v1'   --cuda | tee reach.log
+# mpirun -np 1 python3.8 -u ./usecase/her/train.py --env_name='RobelDClawCube' --cuda | tee reach.log
