@@ -138,6 +138,7 @@ class ddpg_agent:
                 mb_actions = np.array(mb_actions)
                 mb_priority = np.array(mb_priority)
                 # store the episodes
+                import ipdb; ipdb.set_trace()
                 self.buffer.store_episode([mb_obs, mb_ag, mb_g, mb_actions, mb_priority])
                 self._update_normalizer([mb_obs, mb_ag, mb_g, mb_actions])
                 for _ in range(self.args.n_batches):

@@ -9,20 +9,21 @@ the replay buffer here is basically from the openai baselines code
 
 class replay_buffer:
     def __init__(self, env_params, buffer_size, sample_func):
-        self.env_params = env_params
-        self.T = env_params['max_timesteps']
-        self.size = buffer_size // self.T
+        self.env_params           = env_params
+        self.T                    = env_params['max_timesteps']
+        self.size                 = buffer_size // self.T
         # memory management
-        self.current_size = 0
+        self.current_size         = 0
         self.n_transitions_stored = 0
-        self.sample_func = sample_func
+        self.sample_func          = sample_func
         # create the buffer to store info
-        self.buffers = {'obs': np.empty([self.size, self.T + 1, self.env_params['obs']]),
-                        'ag': np.empty([self.size, self.T + 1, self.env_params['goal']]),
-                        'g': np.empty([self.size, self.T, self.env_params['goal']]),
-                        'actions': np.empty([self.size, self.T, self.env_params['action']]),
-                        'priority': np.empty([self.size, self.T, 1]),
-                        }
+        self.buffers = {
+            'obs'     : np.empty([self.size, self.T + 1, self.env_params['obs']]),   # observation
+            'ag'      : np.empty([self.size, self.T + 1, self.env_params['goal']]),  # goal
+            'g'       : np.empty([self.size, self.T,     self.env_params['goal']]),
+            'actions' : np.empty([self.size, self.T,     self.env_params['action']]),
+            'priority': np.empty([self.size, self.T,     1]),
+        }
         # thread lock
         self.lock = threading.Lock()
 

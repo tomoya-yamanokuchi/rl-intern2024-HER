@@ -34,7 +34,6 @@ class RobelDClawCube(object):
 
         self.domainInfo = self.env.domainInfo
 
-
         '''
         追加分
         '''

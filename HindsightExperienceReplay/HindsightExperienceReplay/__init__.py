@@ -9,3 +9,4 @@ from . import rl_modules
 
 from .rl_modules import *
 from .arguments import *
+from .get_env_params import get_env_params

@@ -8,7 +8,7 @@ import random
 import torch
 
 # from HindsightExperienceReplay.arguments import get_args
-from HindsightExperienceReplay import get_args
+from HindsightExperienceReplay import get_args, get_env_params
 from HindsightExperienceReplay import ddpg_agent
 # from HindsightExperienceReplay import UserDefinedSettings
 from HindsightExperienceReplay import UserDefinedSettingsFactory
@@ -21,27 +21,6 @@ train the agent, the MPI part code is copy from openai baselines(https://github.
 
 """
 
-
-def get_env_params(env, env_name):
-    obs = env.reset()
-    # close the environment
-
-    if env_name != 'Pendulum':
-        params = {'obs': obs['observation'].shape[0],
-                  'goal': obs['desired_goal'].shape[0],
-                  'action': env.action_space.shape[0],
-                  'action_max': env.action_space.high[0],
-                  }
-        params['max_timesteps'] = env._max_episode_steps
-    else:
-        params = {'obs': obs['observation'].shape[0],
-                  'goal': obs['desired_goal'].shape[0],
-                  'action': env.action_space.shape[0],
-                  'action_max': env.MAX_ACTION,
-                  }
-        params['max_timesteps'] = env.MAX_EPISODE_LENGTH
-
-    return params
 
 
 def launch(args):
