@@ -37,10 +37,11 @@ class GetState:
         # print("euler_angles = {}".format(euler_angles))
         # print("euler_angles (z) = {}".format(euler_angles[0]))
         # ----------------
+        # import ipdb; ipdb.set_trace()
         state = self.StateFactory.create_for_get_state(
             robot_position        = robot_position,
             # object_position       = self.doi_object_state.extract(state.qpos),
-            object_position       = state.qpos[18:],
+            # object_position       = state.qpos[18:],
             object_rotation       = euler_angles,
             robot_velocity        = state.qvel[:9],
             # object_velocity       = self.doi_object_state.extract(state.qvel),

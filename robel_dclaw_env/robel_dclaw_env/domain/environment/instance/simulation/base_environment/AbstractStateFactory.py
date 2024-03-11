@@ -5,7 +5,7 @@ class AbstractStateFactory(ABC):
     def create_for_init_env(
             task_space_position,
             robot_velocity,
-            object_position,
+            # object_position,
             object_rotation,
             object_velocity,
             time,
@@ -20,7 +20,7 @@ class AbstractStateFactory(ABC):
             end_effector_position,
             robot_position,
             robot_velocity,
-            object_position,
+            # object_position,
             object_rotation,
             object_velocity,
             time,

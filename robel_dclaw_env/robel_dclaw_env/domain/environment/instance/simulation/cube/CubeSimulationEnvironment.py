@@ -75,6 +75,9 @@ class CubeSimulationEnvironment(AbstractEnvironment):
             # self.base_env.sim.step()
 
         # import ipdb; ipdb.set_trace()
+        # self.base_env.sim.timestep
+
+        # import ipdb; ipdb.set_trace()
         self.set_task_space_ctrl(self.TaskSpaceValueObject(NTD(state["task_space_position"].value)))
         self.step()
         # self.base_env.sim.step()

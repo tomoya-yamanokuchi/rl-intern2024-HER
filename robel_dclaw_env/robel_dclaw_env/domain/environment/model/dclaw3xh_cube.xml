@@ -5,6 +5,7 @@
   <include file="./cube/dependencies_pushing_object.xml"/>
 
   <size njmax="8000" nconmax="4000"/>
+  <option timestep='0.002'/>
 
   <worldbody>
     <camera name="canonical"            mode= "fixed" euler="0 0 1.5707963267948966" pos="0 0 0.192"/>
@@ -20,7 +21,7 @@
       <include file="./robot/assets/chain3xh_overlay.xml"/>
     </body>
 
-    <body name="object1" pos="0 0 0.03">
+    <body name="object1" pos="0 0 0.035">
       <include file="./cube/object_current.xml"/>
     </body>
 

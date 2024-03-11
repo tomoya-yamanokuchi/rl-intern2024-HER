@@ -8,5 +8,7 @@ class PushingVelocity:
     value: np.ndarray
 
     def __post_init__(self):
-        dimension_assetion(self.value, dim=6) # 無関係の次元含めて全次元使う古いやつ
+        # import ipdb; ipdb.set_trace()
+        dimension_assetion(self.value, dim=1) # 無関係の次元含めて全次元使う古いやつ
+        # dimension_assetion(self.value, dim=6) # 無関係の次元含めて全次元使う古いやつ
         # dimension_assetion(self.value, dim=2) # タスクに関連するxy平面の位置だけ受け取る新しいやつ

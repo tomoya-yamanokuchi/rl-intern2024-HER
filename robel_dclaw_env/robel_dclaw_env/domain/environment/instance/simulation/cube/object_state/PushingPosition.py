@@ -9,4 +9,5 @@ class PushingPosition:
 
     def __post_init__(self):
         dimension_assetion(self.value, dim=7) # 無関係の次元含めて全次元使う古いやつ
+        dimension_assetion(self.value, dim=7) # 無関係の次元含めて全次元使う古いやつ
         # dimension_assetion(self.value, dim=2) # タスクに関連するxy平面の位置だけ受け取る新しいやつ

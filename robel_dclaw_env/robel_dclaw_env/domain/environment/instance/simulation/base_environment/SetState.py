@@ -35,12 +35,12 @@ class SetState:
         # ----------
         qpos      = np.zeros(self.sim.model.nq)
         qpos[:9]  = joint_position.squeeze()
-        qpos[18:] = state["object_position"].value.squeeze() # <--- env specific!
+        # qpos[18:] = state["object_position"].value.squeeze() # <--- env specific!
         return qpos
 
 
     def _set_qvel(self, state: StateDict):
         qvel      = np.zeros(self.sim.model.nv)
         qvel[:9]  = state["robot_velocity"].value.squeeze()
-        qvel[18:] = state["object_velocity"].value.squeeze()
+        # qvel[18:] = state["object_velocity"].value.squeeze()
         return qvel
